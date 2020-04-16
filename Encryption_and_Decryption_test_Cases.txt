@@ -1,0 +1,162 @@
+﻿CSE 220 HW Test Cases
+Encrypt Cases:
+	Case 1
+		plaintext: .asciiz "Stony Brook"
+		ciphertext: .asciiz "CSE 220 and CSE 320 form a two-course sequence. 11001101 is a binary number. 81FE2D is a base-16 number. Base conversion is FUN!"
+		ab_text: .ascii "*******************************************************************"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 67
+
+		Return values: 60, 1
+		Updated plaintext: "stony brook"
+		Updated ciphertext: "Cse 220 AnD csE 320 FoRM A twO-CoURSe seQUeNce. 11001101 is a BInarY nUMBer. 81FE2D is A bAsE-16 NUMBer. Base conversion is FUN!"
+
+
+	Case 2
+		plaintext: .asciiz "I’m.a.Seawolf!!"
+		ciphertext: .asciiz "Python features a dynamic type system and automatic memory management. It supports multiple PROGRAMMING paradigms."
+		ab_text: .ascii "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 72
+
+		Return values: 70, 0
+		Updated plaintext: "i’m.a.seawolf!!"
+		Updated ciphertext: "pYthoN FEatuREs a DYNAmic typE SYStEm aNd auTomatic mEmORy mANAgeMeNT. it SuPPORTS multiple PROGRAMMING paradigms."
+							 
+		
+	Case 3
+		plaintext: .asciiz "Wolfie Seawolf"
+		ciphertext: .asciiz "Python features a dynamic type system and automatic memory management. It supports multiple PROGRAMMING paradigms."
+		ab_text: .ascii "******"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 6
+
+		Return values: 5, 0
+		Updated plaintext: "wolfie seawolf" or "Wolfie Seawolf"
+		Updated ciphertext: "PYTHOn features a dynamic type system and automatic memory management. It supports multiple programming paradigms."
+
+	Case 4
+		plaintext: .asciiz "Wolfie Seawolf"
+		ciphertext: .asciiz "Python features a dynamic type system and automatic memory management. It supports multiple PROGRAMMING paradigms."
+		ab_text: .ascii "%%"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 2
+
+		Return values: 0, 0
+		Updated plaintext: "Wolfie Seawolf" or "wolfie seawolf"
+		Updated ciphertext: "Python features a dynamic type system and automatic memory management. It supports multiple programming paradigms."
+
+	Case 5
+		plaintext: .asciiz ""
+		ciphertext: .asciiz "The Scholars program is a vibrant community of high-achieving students at Stony Brook."
+		ab_text: .ascii "!!!!!!!!!!!!!!!!"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 16
+
+		Return values: 5, 1
+		Updated plaintext: ""
+		Updated ciphertext: "THE SCholars program is a vibrant community of high-achieving students at Stony Brook."
+		
+	Case 6
+		plaintext: .asciiz ""
+		ciphertext: .asciiz "The Scholars program is a vibrant community of high-achieving students at Stony Brook."
+		ab_text: .ascii "!!!!"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 4
+
+		Return values: 0, 0
+		Updated plaintext: ""
+		Updated ciphertext: "The Scholars program is a vibrant community of high-achieving
+		students at Stony Brook."
+	
+Decrypt Cases:
+	ciphertext: .asciiz "sHARDPLate Is aN AncIENt AND maGIcAL TyPe OF fUlL-BODy ARMOr FOUNd ON ROsHAr. It iS infUseD wITh StoRMLigHt AnD GRANts great power."
+	ab_text: .ascii "******************************************************************************************************************"
+	null: .byte 0
+	.align 2
+	ab_text_length: .word 114
+
+	Case 1
+		ciphertext: .asciiz "AbcDefgHijkLMnOpqrSTUVwXyzaBCDefGhijKlMNoPQRSTUvWXYZABC"
+		ab_text: .ascii "///////////////////////////////////////////////////////"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 55
+		
+		Return value: 55
+		Updated ab text: "BAABAAABAAABBABAAABBBBABAAABBBAABAAABABBABBBBBBABBBBBBB"
+		
+	Case 2
+		ciphertext: .asciiz "sHARDPLate Is aN AncIENt AND maGIcAL TyPe OF fUlL-BODy ARMOr FOUNd ON ROsHAr. It iS infUseD wITh StoRMLigHt AnD GRANts great power."
+		ab_text: .ascii "******************************************************************************************************************"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 114
+		
+		Return value: 95
+		Updated ab text: "ABBBBBBAAABAABBAABBBABBBAABBABBBABABBABABBBBABBBBABBBBABBBBABBABAABAAABAABABBABAABBBAABABABBBBB*******************"
+
+	Case 3
+		ciphertext: .asciiz "2019 GO STONY BROOK!"
+		ab_text: .ascii "+++++++++++++++"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 15
+
+	
+		Return value: 5
+		Updated ab text: "BBBBB++++++++++"
+		
+	Case 4 (taken from next part)
+		ciphertext: .asciiz "Cse 220 AnD csE 320 FoRM A twO-CoURSe seQUeNce. 11001101 is a BInarY nUMBer."
+		ab_text: .ascii "????????????????????????????????????"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 36
+		
+		Return value: -1
+		Updated ab text: "????????????????????????????????????"
+		
+Decrypt Messages Cases:
+	Case 1
+		ciphertext: .asciiz "Cse 220 AnD csE 320 FoRM A twO-CoURSe seQUeNce. 11001101 is a BInarY nUMBer. 81FE2D is A bAsE-16 NUMBer. Base conversion is FUN!"
+		plaintext: .asciiz "@@@@@@@@@@@@@@@@@@@@@@@@@"
+		ab_text: .ascii "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 86
+		
+		Return value: 11
+		Updated plaintext: STONY BROOK\0@@@@@@@@@@@@@
+		Updated ab text: BAABABAABBABBBAABBABBBAAABBABAAAAABBAAABABBBAABBBAABABABBBBB%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	Case 2
+		ciphertext: .asciiz "2019 GO STONY BROOK!"
+		plaintext: .asciiz "&&&&&&&&&&&&&&"
+		ab_text: .ascii "++++++++++++++++"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 16
+		
+		Return value: 0
+		Updated plaintext: \0&&&&&&&&&&&&&
+		Updated ab text: "BBBBB+++++++++++"
+	
+	Case 3
+		ciphertext: .asciiz "Cse 220 AnD csE 320 FoRM A twO-CoURSe seQUeNce. 11001101 is a BInarY nUMBer."
+		plaintext: .asciiz "&&&&&&&&&&&&&"
+		ab_text: .ascii "????????????????????????????????????"
+		null: .byte 0
+		.align 2
+		ab_text_length: .word 36
+		
+		Return value: -1
+		Updated plaintext: &&&&&&&&&&&&&
+		Updated ab text: "????????????????????????????????????"
+		
